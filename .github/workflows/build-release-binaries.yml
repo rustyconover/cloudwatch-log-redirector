@@ -1,5 +1,8 @@
 name: "ci-build-release-binaries"
 
+permissions:
+  contents: write
+
 on:
   release:
     types: [created]
