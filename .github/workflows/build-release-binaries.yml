@@ -69,6 +69,10 @@ jobs:
           packages: musl-tools # provides musl-gcc
           version: 1.0
 
+      - name: install musl-target
+        if: matrix.target == 'x86_64-unknown-linux-musl'
+        run: rustup target add x86_64-unknown-linux-musl
+
       - name: build_${{ matrix.target }}_release_binary
         shell: bash
         run: cargo build --target=${{ matrix.target }} --release
