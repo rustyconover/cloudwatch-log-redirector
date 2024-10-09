@@ -135,7 +135,7 @@ async fn main() -> Result<(), Error> {
 
         if let Err(e) = create_log_group(&client, &args.log_group_name).await {
             if e.to_string().contains("ResourceAlreadyExistsException") {
-                tracing::info!("Log group already exists");
+                tracing::debug!("Log group already exists");
             } else {
                 tracing::error!("Error creating log group: {}", e);
             }
@@ -144,7 +144,7 @@ async fn main() -> Result<(), Error> {
             create_log_stream(&client, &args.log_group_name, &args.log_stream_name).await
         {
             if e.to_string().contains("ResourceAlreadyExistsException") {
-                tracing::info!("Log stream already exists");
+                tracing::debug!("Log stream already exists");
             } else {
                 tracing::error!("Error creating log group: {}", e);
             }
@@ -258,7 +258,7 @@ async fn main() -> Result<(), Error> {
                 tracing::trace!("Nothing to flush");
                 let exit = exit_flag_handle.lock().await;
                 if *exit {
-                    tracing::info!("Exiting flush loop due to flag being set");
+                    tracing::debug!("Exiting flush loop due to flag being set");
                     break;
                 }
                 skip_sleep = false;
@@ -269,7 +269,7 @@ async fn main() -> Result<(), Error> {
                 skip_sleep = true;
             }
 
-            tracing::info!("Flushing {} log events", messages.len());
+            tracing::debug!("Flushing {} log events", messages.len());
             let result = client
                 .put_log_events()
                 .log_group_name(&args.log_group_name)
@@ -294,7 +294,7 @@ async fn main() -> Result<(), Error> {
     let child_status = child.wait().await;
     match &child_status {
         Ok(exit_status) => {
-            tracing::info!("Process finished with exit status: {}", exit_status);
+            tracing::debug!("Process finished with exit status: {}", exit_status);
         }
         Err(e) => {
             tracing::error!("Failed to wait for child process: {}", e);
@@ -315,7 +315,7 @@ async fn main() -> Result<(), Error> {
     }
 
     // Set the exit indicator to true
-    tracing::info!("Setting exit indicator");
+    tracing::debug!("Setting exit indicator so final messages are flushed.");
     {
         let mut exit = exit_indicator.lock().await;
         *exit = true;
