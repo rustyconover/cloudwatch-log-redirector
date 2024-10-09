@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "cargo" # This specifies that you're using Rust's Cargo
+    directory: "/"               # Location of your Cargo.toml file
+    schedule:
+      interval: "weekly"         # Options: "daily", "weekly", "monthly"
+    commit-message:
+      prefix: "fix"              # Customize the commit message prefix
+
