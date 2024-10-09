@@ -57,9 +57,7 @@ jobs:
       - name: copy_files_to_pkg_subfolder
         shell: bash
         run: |
-          cp LICENSE-APACHE ${{ steps.set_output.outputs.subfolder }}
-          cp LICENSE-MIT ${{ steps.set_output.outputs.subfolder }}
-          cp README.md ${{ steps.set_output.outputs.subfolder }}
+          cp readme.md ${{ steps.set_output.outputs.subfolder }}
 
       - name: install_rust
         uses: dtolnay/rust-toolchain@stable
