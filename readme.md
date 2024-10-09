@@ -37,7 +37,19 @@ Options:
 Here’s a quick example of how to use the tool:
 
 ```bash
-cloudwatch-log-redirector my-log-group my-log-stream my-command --arg1 value1 --arg2 value2
+cloudwatch-log-redirector \
+  my-log-group \
+  my-log-stream \
+  command arg1 arg2
+```
+
+Here is a very simple that likely isn't very useful.
+
+```bash
+cloudwatch-log-redirector \
+  my-log-group \
+  my-log-stream \
+  ls -lR
 ```
 
 ## How It Works
