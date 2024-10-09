@@ -16,7 +16,7 @@ CloudWatch Logs is a fantastic service for storing application logs, especially 
 
 Getting started is simple! Here’s how to use the CloudWatch Log Redirector:
 
-```bash
+```
 Usage: cloudwatch-log-redirector [OPTIONS] <LOG_GROUP_NAME> <LOG_STREAM_NAME> <COMMAND> [ARGS]...
 
 Arguments:
