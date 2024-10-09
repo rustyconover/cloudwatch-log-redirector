@@ -36,7 +36,7 @@ Options:
 
 Here’s a quick example of how to use the tool:
 
-```bash
+```
 cloudwatch-log-redirector \
   my-log-group \
   my-log-stream \
@@ -45,7 +45,7 @@ cloudwatch-log-redirector \
 
 Here is a very simple that likely isn't very useful.
 
-```bash
+```
 cloudwatch-log-redirector \
   my-log-group \
   my-log-stream \
