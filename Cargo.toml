@@ -2,6 +2,13 @@
 name = "cloudwatch-log-redirector"
 version = "0.1.0"
 edition = "2021"
+license = ""MIT OR Apache-2.0"
+description = "Redirect STDERR/STDOUT to CloudWatch Logs"
+readme = "readme.md"
+repository = "https://github.com/rustyconover/cloudwatch-log-redirector"
+author = "Rusty Conover <rusty@conover.me>"
+keywords = ["cli", "cloudwatch", "cloudwatchlogs"]
+
 
 [dependencies]
 aws-config = "1.5.8"
