@@ -19,7 +19,7 @@ unsafe_code = "forbid"
 
 [dependencies]
 aws-config = "1.5.8"
-aws-sdk-cloudwatchlogs = "1.51.0"
+aws-sdk-cloudwatchlogs = "1.52.0"
 clap = { version = "4.5.20", features = ["derive"] }
 tokio = { version = "1.40.0", features = ["full"] }
 tracing = "0.1.40"
