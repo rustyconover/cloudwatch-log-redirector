@@ -514,7 +514,7 @@ checksum = "1462739cb27611015575c0c11df5df7601141071f07518d56fcc1be504cbec97"
 
 [[package]]
 name = "cloudwatch-log-redirector"
-version = "0.1.1"
+version = "0.1.7"
 dependencies = [
  "aws-config",
  "aws-sdk-cloudwatchlogs",
