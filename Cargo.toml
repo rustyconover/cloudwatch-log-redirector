@@ -18,7 +18,7 @@ maintenance = { status = "actively-developed" }
 unsafe_code = "forbid"
 
 [dependencies]
-aws-config = "1.5.9"
+aws-config = "1.5.10"
 aws-sdk-cloudwatchlogs = "1.52.0"
 clap = { version = "4.5.20", features = ["derive"] }
 tokio = { version = "1.41.0", features = ["full"] }
