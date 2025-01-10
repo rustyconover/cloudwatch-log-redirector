@@ -4,6 +4,12 @@ use aws_sdk_cloudwatchlogs as cloudwatchlogs;
 use aws_sdk_cloudwatchlogs::types::InputLogEvent;
 use clap::Parser;
 use cloudwatchlogs::{Client, Error};
+use futures::stream::StreamExt;
+use nix::sys::signal::{kill, Signal};
+use nix::unistd::Pid;
+use signal_hook::consts::signal::SIGINT;
+use signal_hook_tokio::Signals;
+use std::os::unix::process::ExitStatusExt;
 use std::process::exit;
 use std::process::Stdio;
 use std::sync::Arc;
@@ -172,6 +178,23 @@ async fn main() -> Result<(), Error> {
         }
     };
 
+    let mut signals = Signals::new(&[SIGINT]).expect("Failed to set up signal handler");
+
+    let child_pid = child.id().expect("Failed to get child PID") as i32;
+
+    let signal_task = tokio::spawn(async move {
+        while let Some(signal) = signals.next().await {
+            if signal == SIGINT {
+                println!(
+                    "Parent received SIGINT. Forwarding to child (PID: {}).",
+                    child_pid
+                );
+                // Forward SIGINT to the child process
+                let _ = kill(Pid::from_raw(child_pid), Signal::SIGINT);
+            }
+        }
+    });
+
     // Create a buffer for the output streams
     let stdout = child.stdout.take().expect("Failed to capture stdout");
     let stderr = child.stderr.take().expect("Failed to capture stderr");
@@ -294,12 +317,18 @@ async fn main() -> Result<(), Error> {
     let child_status = child.wait().await;
     match &child_status {
         Ok(exit_status) => {
-            tracing::debug!("Process finished with exit status: {}", exit_status);
+            if let Some(signal) = exit_status.signal() {
+                tracing::debug!("Process was terminated by signal: {}", signal);
+            } else {
+                tracing::debug!("Process finished with exit status: {}", exit_status);
+            }
         }
         Err(e) => {
             tracing::error!("Failed to wait for child process: {}", e);
         }
     }
+
+    signal_task.abort();
 
     match stdout_task.await {
         Ok(_) => {}
