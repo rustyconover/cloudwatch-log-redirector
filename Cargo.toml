@@ -1,6 +1,6 @@
 [package]
 name = "cloudwatch-log-redirector"
-version = "0.1.9"
+version = "0.1.10"
 edition = "2021"
 authors = ["Rusty Conover <rusty@conover.me>"]
 license = "MIT OR Apache-2.0"

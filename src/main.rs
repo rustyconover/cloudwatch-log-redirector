@@ -358,7 +358,13 @@ async fn main() -> Result<(), Error> {
 
     if let Ok(exit_status) = &child_status {
         // Exit with the same status code as the child process
-        exit(exit_status.code().unwrap());
+        // if there was a status code.
+        if let Some(exit_code) = exit_status.code() {
+            exit(exit_code);
+        } else {
+            // If the child exited with a signal, just exit with 1.
+            exit(1);
+        }
     }
 
     Ok(())
