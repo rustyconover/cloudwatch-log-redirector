@@ -25,7 +25,7 @@ futures = "0.3.31"
 nix = { version = "0.29.0", features = ["signal"] }
 signal-hook = { version = "0.3.17", features = ["extended-siginfo"] }
 signal-hook-tokio = { version = "0.3.1", features = ["futures-v0_3"] }
-tokio = { version = "1.41.0", features = ["full"] }
+tokio = { version = "1.44.0", features = ["full"] }
 tokio-stream = { version = "0.1.17", features = ["signal"] }
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
