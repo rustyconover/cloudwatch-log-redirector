@@ -129,7 +129,7 @@ async fn main() -> Result<(), Error> {
     // Create a CloudWatch Logs client
     let region_provider = RegionProviderChain::default_provider().or_else("us-east-1"); // Adjust your region
     let config = Arc::new(
-        aws_config::defaults(BehaviorVersion::v2024_03_28())
+        aws_config::defaults(BehaviorVersion::v2025_01_17())
             .region(region_provider)
             .load()
             .await,
