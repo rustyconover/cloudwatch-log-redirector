@@ -28,4 +28,4 @@ signal-hook-tokio = { version = "0.3.1", features = ["futures-v0_3"] }
 tokio = { version = "1.41.0", features = ["full"] }
 tokio-stream = { version = "0.1.17", features = ["signal"] }
 tracing = "0.1.40"
-tracing-subscriber = "0.3.18"
+tracing-subscriber = "0.3.20"
